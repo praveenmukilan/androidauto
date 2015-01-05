@@ -1,3 +1,4 @@
+package com.android;
 
 
 import io.appium.java_client.android.AndroidDriver;
@@ -63,7 +64,7 @@ public class SetupAndroidAppium{
 		
 	
 		
-//		Thread.sleep(20000);
+		Thread.sleep(10000);
 		
 
 		DesiredCapabilities capabilities = new DesiredCapabilities();
