@@ -26,7 +26,7 @@ public class SetupAndroidAppium{
 	
 	static DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
 	static DefaultExecutor executor = new DefaultExecutor();
-	@BeforeMethod
+
 	
 	public static void setUp() throws Exception {
 		
@@ -130,6 +130,28 @@ public class SetupAndroidAppium{
 		
 	}
 	
+	@Test
+	public static void main(){
+		
+		
+		try{
+			
+			System.out.println("****************main Starts****************");
+			killNodeAdbPlayer();
+		launchEmulator();
+//		Thread.sleep(20000);
+		setUp();
+		test01();
+		tearDown();
+		stopAppium();
+		System.out.println("****************main Ends****************");
+		}
+		catch(Exception e){
+			
+			System.out.println(e);
+		}
+		
+	}
 
 @AfterMethod
 public static void tearDown() throws Exception {
@@ -140,7 +162,7 @@ public static void tearDown() throws Exception {
 	System.out.println("****************tearDown Ends****************");
 }
 
-@Test
+
 public static void test01() throws InterruptedException {
 System.out.println("Jesus");
 //AndroidDriver andy = (AndroidDriver)driver;
@@ -224,6 +246,7 @@ private static void killNodeAdbPlayer() throws ExecuteException, IOException, Ex
 public static void startAppium() {
     //start appium instance
     try {
+    	System.out.println("*************Start Appium*****************");
         Thread.sleep((long)(Math.random() * 10000)); //wait from 0 to 10 sec for parallel process run
         ProcessBuilder builder = new ProcessBuilder(getCmd());
 //        builder.redirectOutput("path to log file"); //here you can find logs of appium
