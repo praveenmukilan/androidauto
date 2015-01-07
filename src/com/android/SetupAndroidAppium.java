@@ -30,7 +30,7 @@ public class SetupAndroidAppium{
 	
 	public static void setUp() throws Exception {
 		
-		System.out.println("****************setUP Starts****************");
+		System.out.println("****************$$$ setUP Starts****************");
 		
 //		System.out.println("ANDROID_HOME : "+System.getenv("ANDROID_HOME"));
 //		System.out.println("PATH : "+System.getenv("PATH"));
@@ -60,11 +60,11 @@ public class SetupAndroidAppium{
 
 		executor.execute(command, resultHandler);
 */
-		startAppium();
+//		startAppium();
 		
-	
+	System.out.println("<<>>*********** Please wait for 15 seconds ***********");
 		
-		Thread.sleep(10000);
+		Thread.sleep(15000);
 		
 
 		DesiredCapabilities capabilities = new DesiredCapabilities();
@@ -93,7 +93,7 @@ public class SetupAndroidAppium{
 		 * */
 		capabilities.setCapability("deviceName", "device");
 		
-		driver = new AndroidDriver(new URL("http://127.0.0.1:6723/wd/hub"),capabilities);
+		driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),capabilities);
 
 		System.out.println("****");
 	
@@ -142,7 +142,7 @@ public class SetupAndroidAppium{
 //		Thread.sleep(20000);
 		setUp();
 		test01();
-		tearDown();
+
 		stopAppium();
 		System.out.println("****************main Ends****************");
 		}
@@ -249,32 +249,119 @@ public static void startAppium() {
     	System.out.println("*************Start Appium*****************");
         Thread.sleep((long)(Math.random() * 10000)); //wait from 0 to 10 sec for parallel process run
         ProcessBuilder builder = new ProcessBuilder(getCmd());
+        
 //        builder.redirectOutput("path to log file"); //here you can find logs of appium
 //        builder.redirectErrorStream(true);
         appium = builder.start();
         Thread.sleep(3000); //wait 3 sec until server started
+        System.out.println("Server Started");
     } catch (Exception e) {
         e.printStackTrace();
     }
 }
-private static List getCmd(){
+private static List<String> getCmd(){
 //create cmd by adding each param
-List cmd = new ArrayList();
+List<String>  cmd = new ArrayList<String>();
+
+
+
 cmd.add("/Applications/Appium.app/Contents/Resources/node/bin/node");
+
 cmd.add("/Applications/Appium.app/Contents/Resources/node_modules/appium/bin/appium.js");
 cmd.add("--address");
 cmd.add("127.0.0.1");
 cmd.add("--port");
 cmd.add("6723");
 cmd.add("--bootstrap-port");
-cmd.add("6724");
-cmd.add("--log");
-cmd.add("/Users/Praveen/APPIUM/AppiumServer.log");
-;
+cmd.add("6724 ");
+
+
+cmd.add(" --log");
+cmd.add(" /Users/Praveen/APPIUM/AppiumServer.log");
+//cmd.append("--webhook");
+//cmd.append("localhost:9876");
+cmd.add(" --log-timestamp");
+cmd.add(" --local-timezone");
+
+StringBuffer sb = new StringBuffer();
+
+sb.append("/Applications/Appium.app/Contents/Resources/node/bin/node ");
+
+sb.append("/Applications/Appium.app/Contents/Resources/node_modules/appium/bin/appium.js ");
+sb.append("--address ");
+sb.append("127.0.0.1 ");
+sb.append("--port ");
+sb.append("6723 ");
+sb.append("--bootstrap-port ");
+sb.append("6724 ");
+
+
+sb.append(" --log ");
+sb.append(" /Users/Praveen/APPIUM/AppiumServer.log ");
+//cmd.append("--webhook");
+//cmd.append("localhost:9876");
+sb.append(" --log-timestamp ");
+sb.append(" --local-timezone ");
+
+System.out.println("Command : "+sb.toString());
 
 return cmd;
 }
 
+/*
+public static void getStringA throws ExecuteException, IOException{
+	
+	
+	resultHandler = new DefaultExecuteResultHandler();
+	executor = new DefaultExecutor();
+	executor.setExitValue(1);
+//	executor.execute(killNode,resultHandler);
+//	executor.execute(killPlayerEmulator,resultHandler);
+//	executor.execute(killADB,resultHandler);
+	
+//	CommandLine command = new CommandLine("/bin/sh -c");
+//	command.addArgument("/Applications/Appium.app/Contents/Resources/node/bin/node",false);
+	
+	CommandLine command = new CommandLine("/Applications/Appium.app/Contents/Resources/node/bin/node");
+
+	
+	command.addArgument("/Applications/Appium.app/Contents/Resources/node_modules/appium/bin/appium.js", false);
+	command.addArgument("--address", false);
+	command.addArgument("127.0.0.1");
+	command.addArgument("--port", false);
+	command.addArgument("6723");
+	command.addArgument("--bootstrap-port", false);
+	command.addArgument("6724");
+//	command.addArgument("--no-reset", false);
+
+	executor.execute(command, resultHandler);
+
+
+StringBuffer sb = new StringBuffer();
+
+sb.append("/Applications/Appium.app/Contents/Resources/node/bin/node ");
+
+sb.append("/Applications/Appium.app/Contents/Resources/node_modules/appium/bin/appium.js ");
+sb.append("--address ");
+sb.append("127.0.0.1 ");
+sb.append("--port ");
+sb.append("6723 ");
+sb.append("--bootstrap-port ");
+sb.append("6724 ");
+
+
+sb.append(" --log ");
+sb.append(" /Users/Praveen/APPIUM/AppiumServer.log ");
+//cmd.append("--webhook");
+//cmd.append("localhost:9876");
+sb.append(" --log-timestamp ");
+sb.append(" --local-timezone ");
+
+System.out.println("Command : "+sb.toString());
+	
+}
+
+*/
 public static void stopAppium(){
 //stop appium instance
 appium.destroy();
