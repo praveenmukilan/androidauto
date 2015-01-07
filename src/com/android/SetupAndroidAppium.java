@@ -268,6 +268,9 @@ cmd.add("--port");
 cmd.add("6723");
 cmd.add("--bootstrap-port");
 cmd.add("6724");
+cmd.add("--log");
+cmd.add("/Users/Praveen/APPIUM/AppiumServer.log");
+;
 
 return cmd;
 }
