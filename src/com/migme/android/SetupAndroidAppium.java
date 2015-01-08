@@ -1,4 +1,4 @@
-package com.android;
+package com.migme.android;
 
 
 import io.appium.java_client.android.AndroidDriver;
@@ -18,6 +18,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import com.migme.util.Constants;
 
 public class SetupAndroidAppium{
 
@@ -61,12 +63,15 @@ public class SetupAndroidAppium{
 		executor.execute(command, resultHandler);
 */
 //		startAppium();
-		
+	
+		/*
 	System.out.println("<<>>*********** Please wait for 15 seconds ***********");
 		
 		Thread.sleep(15000);
+		*/
 		
-
+		String androidApkPath = System.getenv("HOME")+Constants.getFileSep()+"APPIUM/"+System.getenv("ANDROIDAPK");
+		System.out.println("androidApkPath : "+androidApkPath);
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 
 		capabilities.setCapability("platformName", "Android");		
@@ -78,8 +83,9 @@ public class SetupAndroidAppium{
 		 * */
 //		capabilities.setCapability("appPackage", "com.migmeplayground");
 //		capabilities.setCapability("appActivity", "com.projectgoth.activity.MainActivity");
-//		
-		capabilities.setCapability("app", "/Users/Praveen/APPIUM/mig33Droidv5.00.020.apk");
+//		https://tools.projectgoth.com/jenkins/view/3.%20Mobile/job/QA-CI%20androidV5/ws/target/
+//		capabilities.setCapability("app", "/Users/Praveen/APPIUM/mig33Droidv5.00.020.apk");
+		capabilities.setCapability("app", androidApkPath);
 //		capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "device");		
 		
 
@@ -142,8 +148,8 @@ public class SetupAndroidAppium{
 //		Thread.sleep(20000);
 		setUp();
 		test01();
-
-		stopAppium();
+// As the server start through code is having issues, commenting stopAppium()
+//		stopAppium();
 		System.out.println("****************main Ends****************");
 		}
 		catch(Exception e){
@@ -157,7 +163,8 @@ public class SetupAndroidAppium{
 public static void tearDown() throws Exception {
 	System.out.println("****************tearDown Starts****************");
 
-	driver.quit();
+	if(!driver.equals(null))
+	       driver.quit();
 	killNodeAdbPlayer();
 	System.out.println("****************tearDown Ends****************");
 }
@@ -363,6 +370,7 @@ System.out.println("Command : "+sb.toString());
 
 */
 public static void stopAppium(){
+	System.out.println("****************Stop Appium****************");
 //stop appium instance
 appium.destroy();
 }
