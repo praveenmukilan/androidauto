@@ -70,7 +70,8 @@ public class SetupAndroidAppium{
 		Thread.sleep(15000);
 		*/
 		
-		String androidApkPath = System.getenv("HOME")+Constants.getFileSep()+"APPIUM/"+System.getenv("ANDROIDAPK");
+		String androidApkPath = System.getenv("APKPATH");
+		
 		System.out.println("androidApkPath : "+androidApkPath);
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 
