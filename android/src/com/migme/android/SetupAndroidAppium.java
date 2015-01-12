@@ -3,10 +3,13 @@ package com.migme.android;
 
 import io.appium.java_client.android.AndroidDriver;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.exec.CommandLine;
@@ -31,6 +34,11 @@ public class SetupAndroidAppium{
 
 	
 	public static void setUp() throws Exception {
+		Properties prop = new Properties();
+		
+		FileInputStream fis = new FileInputStream("apkFile.properties");
+		
+		prop.load(fis);
 		
 		System.out.println("****************$$$ setUP Starts****************");
 		
@@ -70,7 +78,7 @@ public class SetupAndroidAppium{
 		Thread.sleep(15000);
 		*/
 		
-		String androidApkPath = System.getenv("APKPATH");
+		String androidApkPath = prop.getProperty("APKPATH");
 		
 		System.out.println("androidApkPath : "+androidApkPath);
 		DesiredCapabilities capabilities = new DesiredCapabilities();
