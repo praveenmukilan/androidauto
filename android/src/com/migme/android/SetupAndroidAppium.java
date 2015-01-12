@@ -193,8 +193,7 @@ System.out.println("Jesus");
 System.out.println("****************test01 Starts****************");
 
 WebDriverWait wait = new WebDriverWait(driver, 30); 
-wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[1]")));
-
+wait.until(ExpectedConditions.elementToBeClickable(By.id("com.projectgoth:id/txt_username")));
 
 
 //driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[1]")).sendKeys("praveenmukilan");
