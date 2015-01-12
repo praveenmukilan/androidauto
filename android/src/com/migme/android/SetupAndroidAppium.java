@@ -18,6 +18,8 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -35,6 +37,8 @@ public class SetupAndroidAppium{
 	
 	public static void setUp() throws Exception {
 		Properties prop = new Properties();
+		
+		//From the build, the apkFile.properties will reside in $WORSPACE/android
 		
 		FileInputStream fis = new FileInputStream("apkFile.properties");
 		
@@ -183,6 +187,9 @@ public static void test01() throws InterruptedException {
 System.out.println("Jesus");
 //AndroidDriver andy = (AndroidDriver)driver;
 System.out.println("****************test01 Starts****************");
+
+WebDriverWait wait = new WebDriverWait(driver, 30); 
+wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[1]")));
 
 driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[1]")).sendKeys("praveenmukilan");
 driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[2]")).sendKeys("60se!inMS");
