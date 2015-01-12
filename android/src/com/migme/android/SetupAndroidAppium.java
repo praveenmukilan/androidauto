@@ -2,6 +2,7 @@ package com.migme.android;
 
 
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import org.apache.commons.exec.DefaultExecuteResultHandler;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteException;
 import org.openqa.selenium.By;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -99,6 +101,7 @@ public class SetupAndroidAppium{
 //		https://tools.projectgoth.com/jenkins/view/3.%20Mobile/job/QA-CI%20androidV5/ws/target/
 //		capabilities.setCapability("app", "/Users/Praveen/APPIUM/mig33Droidv5.00.020.apk");
 		capabilities.setCapability("app", androidApkPath);
+	
 //		capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "device");		
 		
 
@@ -115,6 +118,7 @@ public class SetupAndroidAppium{
 		driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),capabilities);
 
 		System.out.println("****");
+		d=
 	
 		
 		
@@ -191,9 +195,16 @@ System.out.println("****************test01 Starts****************");
 WebDriverWait wait = new WebDriverWait(driver, 30); 
 wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[1]")));
 
-driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[1]")).sendKeys("praveenmukilan");
-driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[2]")).sendKeys("60se!inMS");
-driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.Button[2]")).click();
+
+
+//driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[1]")).sendKeys("praveenmukilan");
+driver.findElement(By.id("com.projectgoth:id/txt_username"));
+
+//driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[2]")).sendKeys("60se!inMS");
+driver.findElement(By.id("com.projectgoth:id/txt_password"));
+
+//driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.Button[2]")).click();
+driver.findElement(By.id("com.projectgoth:id/btn_signin"));
 
 //driver.findElement(By.id("com.projectgoth:id/txt_username"));
 //driver.findElement(MobileBy.ByAndroidUIAutomator.)
