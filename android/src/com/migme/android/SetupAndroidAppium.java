@@ -127,6 +127,7 @@ public class SetupAndroidAppium{
 	
 	
 		driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
+		
 
 		System.out.println("****************setUp Ends****************");
 }
@@ -197,14 +198,14 @@ wait.until(ExpectedConditions.elementToBeClickable(By.id("com.projectgoth:id/txt
 
 
 //driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[1]")).sendKeys("praveenmukilan");
-driver.findElement(By.id("com.projectgoth:id/txt_username"));
+driver.findElement(By.id("com.projectgoth:id/txt_username")).sendKeys("praveenmukilan");
 //driver.findElementsByAndroidUIAutomator("com.projectgoth:id/txt_username");
 
 //driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[2]")).sendKeys("60se!inMS");
-driver.findElement(By.id("com.projectgoth:id/txt_password")).sendKeys("praveenmukilan");;
+driver.findElement(By.id("com.projectgoth:id/txt_password")).sendKeys("60se!inMS");
 
 //driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.Button[2]")).click();
-driver.findElement(By.id("com.projectgoth:id/btn_signin")).sendKeys("60se!inMS");
+driver.findElement(By.id("com.projectgoth:id/btn_signin")).click();
 
 //driver.findElement(By.id("com.projectgoth:id/txt_username"));
 //driver.findElement(MobileBy.ByAndroidUIAutomator.)
@@ -241,7 +242,7 @@ System.out.println("****************test01 Ends****************");
  * Method to launch the emulator programmatically
  * */
 
-public static void launchEmulator() throws ExecuteException, IOException{
+public static void launchEmulator() throws ExecuteException, IOException, InterruptedException{
 	
 	
 	System.out.println("****************launchEmulator Starts****************");
@@ -250,8 +251,7 @@ public static void launchEmulator() throws ExecuteException, IOException{
 
 	
 
-//	command.addArgument("--address", false);
-//	command.addArgument("127.0.0.1");
+
 	launchEmul.addArgument("--vm-name", false);
 	launchEmul.addArgument("SamsungGalaxyS4");
 	
@@ -260,6 +260,8 @@ public static void launchEmulator() throws ExecuteException, IOException{
 	executor.setExitValue(1);
 	
 	executor.execute(launchEmul, resultHandler);
+	Thread.sleep(20000);
+	
 	System.out.println("****************launchEmulator Ends****************");
 }
 
