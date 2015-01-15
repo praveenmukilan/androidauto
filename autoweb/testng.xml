@@ -18,7 +18,7 @@
 	<test name="web automation">
 
 	<classes>
-	<class name="com.migme.android.SetupAndroidAppium"></class>
+	<class name="com.autome.web.TestSuite"></class>
 	</classes>
 	</test>
 
