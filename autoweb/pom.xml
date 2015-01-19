@@ -12,8 +12,8 @@
         <version>3.1</version>
        
        <configuration>
-          <source/>
-          <target/>
+          <source>1.8</source>
+          <target>1.8</target>
         </configuration>
         
       </plugin>
@@ -77,7 +77,39 @@
 	<artifactId>java-client</artifactId>
 	<version>2.1.0</version>
 </dependency>
- 
-  
+<!-- 
+ <dependency>
+    <groupId>org.imaginea</groupId>
+    <artifactId>testautomationframework</artifactId>
+    <version>>0.0.4-SNAPSHOT</version>
+</dependency>
+
+-->
+<!-- Enable this when the taf framework needs to be added as JAR -->
+<!-- 
+<dependency>
+    <groupId>taf</groupId>
+    <artifactId>testautomationframework</artifactId>
+    <version>0.0.4</version>
+</dependency>
+ -->
+  		<dependency>
+			<groupId>net.sf.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>2.3</version>
+		</dependency>
   </dependencies>
+
+
+<!-- Enable this when the taf framework needs to be added as JAR -->
+<!-- 
+<repositories>
+
+<repository>
+<id>in-project</id>
+<name>In Project Repo</name>
+<url>file://${project.basedir}/lib</url>
+</repository>
+</repositories>
+ -->
 </project>
