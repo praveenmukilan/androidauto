@@ -18,7 +18,8 @@
 	<test name="PoC">
 
 	<classes>
-	<class name="com.migme.android.SetupAndroidAppium"></class>
+	<!--<class name="com.migme.android.execution.AndyDriverScript"></class> -->
+	 <class name="com.migme.android.AndroidDriverScript"></class> 
 	</classes>
 	</test>
 
