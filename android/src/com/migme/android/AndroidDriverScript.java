@@ -66,8 +66,9 @@ public class AndroidDriverScript{
 		//***************************
 
 		//alternative approach instead of sendkeys //192.168.56.101:5555
+//		((MobileElement)driver.findElementById(OR.getProperty("username_id"))).
 		//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")")).click();
-		//sendKeysUsingADB(username);
+//		sendKeysUsingADB(username);
 		//Process user = Runtime.getRuntime().exec("adb -s 192.168.56.101:5555 shell input text "+username);
 		//ProcessBuilder pb = new ProcessBuilder("adb", "-s", "192.168.56.101:5555", "shell","input", "text", username);
 		//Process pc = pb.start();
@@ -83,6 +84,7 @@ public class AndroidDriverScript{
 
 
 
+
 		System.out.println("Done");
 		//***************************
 		//driver.findElementByAccessibilityId("txt_username").clear();
@@ -93,10 +95,10 @@ public class AndroidDriverScript{
 		//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")")).sendKeys(username);
 		//The above code is not working in API level <19
 
-//		driver.findElementById("com.projectgoth:id/txt_username").sendKeys(username);
+		driver.findElementById("com.projectgoth:id/txt_username").sendKeys(username);
 
 		//(MobileElement)driver.findElementById(OR.getProperty("username_id")).
-		driver.findElementById(OR.getProperty("username_id")).sendKeys(username);
+//		driver.findElementById(OR.getProperty("username_id")).sendKeys(username);
 
 		//driver.findElementByAccessibilityId("txt_username").sendKeys(username);
 
@@ -119,7 +121,8 @@ public class AndroidDriverScript{
 		//***************************
 
 		//alternative approach instead of sendkeys //192.168.56.101:5555
-		//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_password\")")).click();
+//		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_password\")")).click();
+//		sendKeysUsingADB(password);
 		//Process user = Runtime.getRuntime().exec("adb -s 192.168.56.101:5555 shell input text "+username);
 		//System.out.println("password : "+password);
 		//ProcessBuilder pbPass = new ProcessBuilder("adb", "-s", "192.168.56.101:5555", "shell", "input","text", "60se!inMS");
@@ -232,6 +235,7 @@ public class AndroidDriverScript{
 		capabilities.setCapability("platformName", "Android");		
 //		capabilities.setCapability("platformVersion", "4.4.2");
 //		capabilities.setCapability("browserName", "android");
+//    	capabilities.setCapability("automationName", "Selendroid");
 		
 		/* appPackage & appActivity is not mandatory as the Appium will inspect the .apk file for the default package and the activity
 		 * Issues if any, please set it explicitly.
@@ -256,7 +260,7 @@ public class AndroidDriverScript{
 		capabilities.setCapability("deviceName", "device");
 		
 		driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),capabilities);
-		wait = new WebDriverWait(driver, 10);
+		wait = new WebDriverWait(driver, 30);
 		System.out.println("****");
 	
 	
