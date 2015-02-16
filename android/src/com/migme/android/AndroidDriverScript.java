@@ -64,10 +64,10 @@ public class AndroidDriverScript{
 		
 		privateChat();
 //	
-//		postText();
-//		postImage();
-//		postEmoticons();
-//		newGroupChat();
+		postText();
+		postImage();
+		postEmoticons();
+		newGroupChat();
 
 		signOut();
 
