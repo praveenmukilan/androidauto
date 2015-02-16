@@ -53,7 +53,7 @@ public class AndroidDriverScript{
 
 	
 	public static void test01() throws InterruptedException, IOException {
-		System.out.println("Jesus");
+//		System.out.println("Jesus");
 		//AndroidDriver andy = (AndroidDriver)driver;
 		System.out.println("****************test01 Starts****************");
 
@@ -283,7 +283,7 @@ public static void startNewChat(){
 
 
 public static void privateChat(){
-	System.out.println("*****************privateChat*********************");
+	System.out.println("*****************privateChat starts*********************");
     
  startNewChat();
 
@@ -302,7 +302,7 @@ public static void privateChat(){
 	driver.findElementByAccessibilityId(OR.getProperty("chatSend")).click();
 	
 	chatToFeedPage();
-	
+	System.out.println("*****************privateChat ends*********************");
 
 }
 
@@ -372,7 +372,7 @@ public static void postEmoticonInChat(){
 }
 
 public static void newGroupChat(){
-	System.out.println("*****************newGroupChat*********************");
+	System.out.println("*****************newGroupChat starts*********************");
 	startNewChat();
 	   // 1. Click Main Button
 	   // 2. Click the New Chat Icon
@@ -407,7 +407,7 @@ public static void newGroupChat(){
 	driver.findElementByAccessibilityId(OR.getProperty("chatSend")).click();
 
 	chatToFeedPage();
-
+	System.out.println("*****************newGroupChat ends*********************");
 }
 
 public static void waitForSecs(int seconds){
