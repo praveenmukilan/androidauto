@@ -45,6 +45,7 @@ public class AndroidDriverScript{
 	public static AppiumDriver driver;
 	public static Process appium;
 	public static Properties OR;
+	public static WebDriverWait wait;
 	
 	static DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
 	static DefaultExecutor executor = new DefaultExecutor();
@@ -95,22 +96,22 @@ public class AndroidDriverScript{
 //		driver.findElementById("com.projectgoth:id/txt_username").sendKeys(username);
 
 		//(MobileElement)driver.findElementById(OR.getProperty("username_id")).
-		//driver.findElementById(OR.getProperty("username_id")).sendKeys(username);
+		driver.findElementById(OR.getProperty("username_id")).sendKeys(username);
 
 		//driver.findElementByAccessibilityId("txt_username").sendKeys(username);
 
 		//driver.executeScript("try{var el = document.getElementById('com.projectgoth:id/txt_username');el.value = 'praveenmukilan';return 0;}catch{return 1;}");
-		//driver.findElement(By.id("com.projectgoth:id/txt_username")).sendKeys("praveenmukilan");
-		driver.findElementByXPath(OR.getProperty("username_xpath")).sendKeys(username);
+//		driver.findElement(By.id("com.projectgoth:id/txt_username")).sendKeys("praveenmukilan");
+//		driver.findElementByXPath(OR.getProperty("username_xpath")).sendKeys(username);
 		//driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[2]")).sendKeys("60se!inMS");
 		//driver.findElementById(OR.getProperty("password_id")).sendKeys(password);
-		driver.findElementByXPath(OR.getProperty("password_xpath")).sendKeys(password);
+//		driver.findElementByXPath(OR.getProperty("password_xpath")).sendKeys(password);
 
 		//The below code is not working in API level <19  -- added 16Feb2015
 		//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_password\")")).sendKeys(password);
 		//The above code is not working in API level <19  -- added 16Feb2015
 
-//		driver.findElementById("com.projectgoth:id/txt_password").sendKeys(password);
+		driver.findElementById("com.projectgoth:id/txt_password").sendKeys(password);
 
 		//MobileElement me = (MobileElement)driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_password\")"));
 		//me.click();
@@ -172,6 +173,7 @@ public class AndroidDriverScript{
 		 }
 	
 	public static void setUp() throws Exception {
+		
 		Properties prop = new Properties();
 		Properties apkFile = new Properties();
 		OR = new Properties();
@@ -254,7 +256,7 @@ public class AndroidDriverScript{
 		capabilities.setCapability("deviceName", "device");
 		
 		driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),capabilities);
-
+		wait = new WebDriverWait(driver, 10);
 		System.out.println("****");
 	
 	
@@ -369,7 +371,9 @@ public static void startNewChat(){
 	//main button click to view the new private group chat icon
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 	
-	driver.findElementByAccessibilityId(OR.getProperty("newChatBtn")).click();
+	wait.until(ExpectedConditions.elementToBeClickable(driver.findElementByAccessibilityId(OR.getProperty("newChatBtn")))).click();
+	
+	 
 
 	//driver.findElementByAccessibilityId("chat_list_tab").click();
 
