@@ -1,13 +1,17 @@
 #Login_Page
 username_id=com.projectgoth:id/txt_username
+username_xpath=//android.widget.EditText[@content-desc='txt_username']
 #mig1praveen
 username=bWlnMXByYXZlZW4=
 
 #praveenmukilan
 #username=cHJhdmVlbm11a2lsYW4=
 
+mainBtnWaitSecs=30
+
 
 password_id=com.projectgoth:id/txt_password
+password_xpath=//android.widget.EditText[@content-desc='txt_password']
 password=NjBzZSFpbk1T
 signinBtn_id=com.projectgoth:id/btn_signin
 

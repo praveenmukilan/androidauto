@@ -144,7 +144,7 @@ public class AndroidDriverScript{
 		//driver.findElement(By.id("com.projectgoth:id/txt_username"));
 		//driver.findElement(MobileBy.ByAndroidUIAutomator.)
 		//WebDriverWait wait = new WebDriverWait(driver, 180);
-		Thread.sleep(20000);
+		Thread.sleep(Integer.parseInt(OR.getProperty("mainBtnWaitSecs")));
 			
 		}
 	
