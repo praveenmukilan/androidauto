@@ -156,7 +156,7 @@ public class AndroidDriverScript{
 		//AndroidDriver andy = (AndroidDriver)driver;
 		System.out.println("****************test01 Starts****************");
 
-		signIn();
+//		signIn();
 
 //		wait.until(ExpectedConditions.elementToBeClickable(By.id("com.projectgoth:id/main_button")));
 
