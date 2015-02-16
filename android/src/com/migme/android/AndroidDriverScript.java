@@ -7,6 +7,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -46,6 +47,8 @@ public class AndroidDriverScript{
 	public static Process appium;
 	public static Properties OR;
 	public static WebDriverWait wait;
+	public static String username;
+	public static String password;
 	
 	static DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
 	static DefaultExecutor executor = new DefaultExecutor();
@@ -59,8 +62,8 @@ public class AndroidDriverScript{
 
 		//driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[1]")).sendKeys("praveenmukilan");
 		//driver.findElementById("com.projectgoth:id/txt_username").click();
-		String username = new String(Base64.getDecoder().decode(OR.getProperty("username")));
-		String password = new String(Base64.getDecoder().decode(OR.getProperty("password")));
+		 username = new String(Base64.getDecoder().decode(OR.getProperty("username")));
+		 password = new String(Base64.getDecoder().decode(OR.getProperty("password")));
 
 
 		//***************************
@@ -74,15 +77,6 @@ public class AndroidDriverScript{
 		//Process pc = pb.start();
 		//Thread.sleep(15000);
 		//pc.waitFor();
-		//CommandLine enterUser = new CommandLine("/Users/Praveen/APPIUM/android-sdk-macosx/platform-tools/adb");
-		//enterUser.addArgument("-s",false);
-		//enterUser.addArguments( "192.168.56.101:5555", false);
-		//enterUser.addArguments( "shell input text", false);
-		//enterUser.addArguments(username, false);
-		////CommandLine enterpass = new CommandLine("adb -s 192.168.56.101:5555 shell input text "+password);
-		//executor.execute(enterUser, resultHandler);
-
-
 
 
 		System.out.println("Done");
@@ -92,10 +86,14 @@ public class AndroidDriverScript{
 		//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")")).clear();
 
 		//The below code is not working in API level <19
-		//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")")).sendKeys(username);
+		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")")).sendKeys(username);
+//		driver.findElement(MobileBy.AndroidUIAutomator("new UiObject(new UiSelector().resourceId(\"com.projectgoth:id/txt_username\"))")).sendKeys(username);
+	
+	
 		//The above code is not working in API level <19
 
-		driver.findElementById("com.projectgoth:id/txt_username").sendKeys(username);
+//		populateUserCredentialsUsingADB();
+//		driver.findElementById("com.projectgoth:id/txt_username").sendKeys(username);
 
 		//(MobileElement)driver.findElementById(OR.getProperty("username_id")).
 //		driver.findElementById(OR.getProperty("username_id")).sendKeys(username);
@@ -106,14 +104,14 @@ public class AndroidDriverScript{
 //		driver.findElement(By.id("com.projectgoth:id/txt_username")).sendKeys("praveenmukilan");
 //		driver.findElementByXPath(OR.getProperty("username_xpath")).sendKeys(username);
 		//driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[2]")).sendKeys("60se!inMS");
-		//driver.findElementById(OR.getProperty("password_id")).sendKeys(password);
+		driver.findElementById(OR.getProperty("password_id")).sendKeys(password);
 //		driver.findElementByXPath(OR.getProperty("password_xpath")).sendKeys(password);
 
 		//The below code is not working in API level <19  -- added 16Feb2015
 		//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_password\")")).sendKeys(password);
 		//The above code is not working in API level <19  -- added 16Feb2015
 
-		driver.findElementById("com.projectgoth:id/txt_password").sendKeys(password);
+//		driver.findElementById("com.projectgoth:id/txt_password").sendKeys(password);
 
 		//MobileElement me = (MobileElement)driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_password\")"));
 		//me.click();
@@ -147,16 +145,24 @@ public class AndroidDriverScript{
 		//driver.findElement(By.id("com.projectgoth:id/txt_username"));
 		//driver.findElement(MobileBy.ByAndroidUIAutomator.)
 		//WebDriverWait wait = new WebDriverWait(driver, 180);
-		Thread.sleep(Integer.parseInt(OR.getProperty("mainBtnWaitSecs")));
+		Thread.sleep(Long.parseLong(OR.getProperty("mainBtnWaitSecs")));
 			
 		}
+	
+	public static void populateUserCredentialsUsingADB() throws ExecuteException, IOException, InterruptedException{
+		
+		driver.findElementById("com.projectgoth:id/txt_username").click();
+		sendKeysUsingADB(username);
+		driver.findElementById("com.projectgoth:id/txt_password").click();
+		sendKeysUsingADB(password);
+	}
 	
 	public static void test01() throws InterruptedException, IOException {
 //		System.out.println("Jesus");
 		//AndroidDriver andy = (AndroidDriver)driver;
 		System.out.println("****************test01 Starts****************");
-
-//		signIn();
+//
+		signIn();
 
 //		wait.until(ExpectedConditions.elementToBeClickable(By.id("com.projectgoth:id/main_button")));
 
@@ -332,7 +338,7 @@ public static void postImage(){
 	driver.findElementByXPath(OR.getProperty("cameraOption")).click();
 	
 	driver.findElementById(OR.getProperty("shutterBtn")).click();
-	driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	driver.findElementById(OR.getProperty("doneBtn")).click();
 	driver.findElementById(OR.getProperty("postTextField")).sendKeys(RandomStringUtils.randomAlphabetic(100));
 	driver.findElementByAccessibilityId(OR.getProperty("postSendBtn")).click();	
@@ -366,7 +372,7 @@ public static void chatToFeedPage(){
 	driver.findElementByAccessibilityId(OR.getProperty("feedBtn")).click();
 
 }
-public static void startNewChat(){
+public static void startNewChat() throws InterruptedException{
 	System.out.println("*****************startNewChat*********************");
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 
@@ -375,7 +381,8 @@ public static void startNewChat(){
 	//main button click to view the new private group chat icon
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 	
-	wait.until(ExpectedConditions.elementToBeClickable(driver.findElementByAccessibilityId(OR.getProperty("newChatBtn")))).click();
+	Thread.sleep(5000);
+	driver.findElementByAccessibilityId(OR.getProperty("newChatBtn")).click();
 	
 	 
 
@@ -384,10 +391,14 @@ public static void startNewChat(){
 	
 }
 
+public static void sleepDriver(int secs) throws InterruptedException{
+	Thread.sleep(secs*1000);
+}
 
-public static void privateChat(){
+
+public static void privateChat() throws InterruptedException{
 	System.out.println("*****************privateChat starts*********************");
-    
+    Thread.sleep(10000);
  startNewChat();
 
  driver.findElementById(OR.getProperty("chatUserNamesList")).click();
@@ -474,7 +485,7 @@ public static void postEmoticonInChat(){
 	driver.findElementByAccessibilityId(OR.getProperty("chatEmoteItem")).click();
 }
 
-public static void newGroupChat(){
+public static void newGroupChat() throws InterruptedException{
 	System.out.println("*****************newGroupChat starts*********************");
 	startNewChat();
 	   // 1. Click Main Button
@@ -570,12 +581,17 @@ public static String getCurrentTimeStamp(){
 
 
 
-public static void sendKeysUsingADB(String textString) throws ExecuteException, IOException{
-	
-	CommandLine enterpass = new CommandLine("/bin/sh -c");
-	 enterpass.addArgument(" /Users/Praveen/APPIUM/android-sdk-macosx/platform-tools/adb -s 192.168.56.101:5555 shell input text "+textString);
+public static void sendKeysUsingADB(String textString) throws ExecuteException, IOException, InterruptedException{
+	System.out.println("************send keys using adb************");
+
+	char a[] = textString.toCharArray();
+	for(char b : a){
+	CommandLine enterpass = new CommandLine("/Users/Praveen/APPIUM/android-sdk-macosx/platform-tools/adb -s 192.168.56.101:5555 shell input text "+b);
+
 	//CommandLine enterpass = new CommandLine("adb -s 192.168.56.101:5555 shell input text "+password);
 	executor.execute(enterpass, resultHandler);
+	}
+	Thread.sleep(10000);
 }
 
 
