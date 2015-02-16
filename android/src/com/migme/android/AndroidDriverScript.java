@@ -504,7 +504,13 @@ System.out.println("Done");
 //driver.findElementByAccessibilityId("txt_username").clear();
 
 //driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")")).clear();
-driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")")).sendKeys(username);
+
+//The below code is not working in API level <19
+//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")")).sendKeys(username);
+//The above code is not working in API level <19
+
+driver.findElementById("com.projectgoth:id/txt_username").sendKeys(username);
+
 //(MobileElement)driver.findElementById(OR.getProperty("username_id")).
 //driver.findElementById(OR.getProperty("username_id")).sendKeys(username);
 
@@ -516,7 +522,13 @@ driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"co
 //driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[2]")).sendKeys("60se!inMS");
 //driver.findElementById(OR.getProperty("password_id")).sendKeys(password);
 //driver.findElementByAccessibilityId("txt_password").sendKeys(password);
-driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_password\")")).sendKeys(password);
+
+//The below code is not working in API level <19  -- added 16Feb2015
+//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_password\")")).sendKeys(password);
+//The above code is not working in API level <19  -- added 16Feb2015
+
+driver.findElementById("com.projectgoth:id/txt_password").sendKeys(password);
+
 //MobileElement me = (MobileElement)driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_password\")"));
 //me.click();
 //sendKeysUsingADB(password);
