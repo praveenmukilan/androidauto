@@ -7,7 +7,6 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
-
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -39,8 +38,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.gargoylesoftware.htmlunit.javascript.background.JavaScriptExecutor;
-import com.migme.util.Constants;
+
 
 public class AndroidDriverScript{
 
@@ -50,7 +48,104 @@ public class AndroidDriverScript{
 	
 	static DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
 	static DefaultExecutor executor = new DefaultExecutor();
+	public static void signIn() throws IOException, InterruptedException{
+		
 
+		/*
+		WebDriverWait wait = new WebDriverWait(driver, 30); 
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("com.projectgoth:id/txt_username")));
+		*/
+
+		//driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[1]")).sendKeys("praveenmukilan");
+		//driver.findElementById("com.projectgoth:id/txt_username").click();
+		String username = new String(Base64.getDecoder().decode(OR.getProperty("username")));
+		String password = new String(Base64.getDecoder().decode(OR.getProperty("password")));
+
+
+		//***************************
+
+		//alternative approach instead of sendkeys //192.168.56.101:5555
+		//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")")).click();
+		//sendKeysUsingADB(username);
+		//Process user = Runtime.getRuntime().exec("adb -s 192.168.56.101:5555 shell input text "+username);
+		//ProcessBuilder pb = new ProcessBuilder("adb", "-s", "192.168.56.101:5555", "shell","input", "text", username);
+		//Process pc = pb.start();
+		//Thread.sleep(15000);
+		//pc.waitFor();
+		//CommandLine enterUser = new CommandLine("/Users/Praveen/APPIUM/android-sdk-macosx/platform-tools/adb");
+		//enterUser.addArgument("-s",false);
+		//enterUser.addArguments( "192.168.56.101:5555", false);
+		//enterUser.addArguments( "shell input text", false);
+		//enterUser.addArguments(username, false);
+		////CommandLine enterpass = new CommandLine("adb -s 192.168.56.101:5555 shell input text "+password);
+		//executor.execute(enterUser, resultHandler);
+
+
+
+		System.out.println("Done");
+		//***************************
+		//driver.findElementByAccessibilityId("txt_username").clear();
+
+		//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")")).clear();
+
+		//The below code is not working in API level <19
+		//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")")).sendKeys(username);
+		//The above code is not working in API level <19
+
+//		driver.findElementById("com.projectgoth:id/txt_username").sendKeys(username);
+
+		//(MobileElement)driver.findElementById(OR.getProperty("username_id")).
+		//driver.findElementById(OR.getProperty("username_id")).sendKeys(username);
+
+		//driver.findElementByAccessibilityId("txt_username").sendKeys(username);
+
+		//driver.executeScript("try{var el = document.getElementById('com.projectgoth:id/txt_username');el.value = 'praveenmukilan';return 0;}catch{return 1;}");
+		//driver.findElement(By.id("com.projectgoth:id/txt_username")).sendKeys("praveenmukilan");
+		driver.findElementByXPath(OR.getProperty("username_xpath")).sendKeys(username);
+		//driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[2]")).sendKeys("60se!inMS");
+		//driver.findElementById(OR.getProperty("password_id")).sendKeys(password);
+		driver.findElementByXPath(OR.getProperty("password_xpath")).sendKeys(password);
+
+		//The below code is not working in API level <19  -- added 16Feb2015
+		//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_password\")")).sendKeys(password);
+		//The above code is not working in API level <19  -- added 16Feb2015
+
+//		driver.findElementById("com.projectgoth:id/txt_password").sendKeys(password);
+
+		//MobileElement me = (MobileElement)driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_password\")"));
+		//me.click();
+		//sendKeysUsingADB(password);
+		//***************************
+
+		//alternative approach instead of sendkeys //192.168.56.101:5555
+		//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_password\")")).click();
+		//Process user = Runtime.getRuntime().exec("adb -s 192.168.56.101:5555 shell input text "+username);
+		//System.out.println("password : "+password);
+		//ProcessBuilder pbPass = new ProcessBuilder("adb", "-s", "192.168.56.101:5555", "shell", "input","text", "60se!inMS");
+		//Process pcPass = pbPass.start();
+		//
+		//Thread.sleep(15000);
+		////pcPass.waitFor();
+
+
+		System.out.println("Done");
+		//***************************
+
+
+
+		/*
+		MobileElement password = (MobileElement)driver.findElement(By.id("com.projectgoth:id/txt_password"));
+		password.setValue("60se!inMS");
+		*/
+		//driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.Button[2]")).click();
+		driver.findElement(By.id("com.projectgoth:id/btn_signin")).click();
+
+		//driver.findElement(By.id("com.projectgoth:id/txt_username"));
+		//driver.findElement(MobileBy.ByAndroidUIAutomator.)
+		//WebDriverWait wait = new WebDriverWait(driver, 180);
+		Thread.sleep(20000);
+			
+		}
 	
 	public static void test01() throws InterruptedException, IOException {
 //		System.out.println("Jesus");
@@ -465,104 +560,7 @@ public static String getCurrentTimeStamp(){
 
 
 
-public static void signIn() throws IOException, InterruptedException{
-	
 
-/*
-WebDriverWait wait = new WebDriverWait(driver, 30); 
-wait.until(ExpectedConditions.elementToBeClickable(By.id("com.projectgoth:id/txt_username")));
-*/
-
-//driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[1]")).sendKeys("praveenmukilan");
-//driver.findElementById("com.projectgoth:id/txt_username").click();
-String username = new String(Base64.getDecoder().decode(OR.getProperty("username")));
-String password = new String(Base64.getDecoder().decode(OR.getProperty("password")));
-
-
-//***************************
-
-//alternative approach instead of sendkeys //192.168.56.101:5555
-//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")")).click();
-//sendKeysUsingADB(username);
-//Process user = Runtime.getRuntime().exec("adb -s 192.168.56.101:5555 shell input text "+username);
-//ProcessBuilder pb = new ProcessBuilder("adb", "-s", "192.168.56.101:5555", "shell","input", "text", username);
-//Process pc = pb.start();
-//Thread.sleep(15000);
-//pc.waitFor();
-//CommandLine enterUser = new CommandLine("/Users/Praveen/APPIUM/android-sdk-macosx/platform-tools/adb");
-//enterUser.addArgument("-s",false);
-//enterUser.addArguments( "192.168.56.101:5555", false);
-//enterUser.addArguments( "shell input text", false);
-//enterUser.addArguments(username, false);
-////CommandLine enterpass = new CommandLine("adb -s 192.168.56.101:5555 shell input text "+password);
-//executor.execute(enterUser, resultHandler);
-
-
-
-System.out.println("Done");
-//***************************
-//driver.findElementByAccessibilityId("txt_username").clear();
-
-//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")")).clear();
-
-//The below code is not working in API level <19
-//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")")).sendKeys(username);
-//The above code is not working in API level <19
-
-driver.findElementById("com.projectgoth:id/txt_username").sendKeys(username);
-
-//(MobileElement)driver.findElementById(OR.getProperty("username_id")).
-//driver.findElementById(OR.getProperty("username_id")).sendKeys(username);
-
-//driver.findElementByAccessibilityId("txt_username").sendKeys(username);
-
-//driver.executeScript("try{var el = document.getElementById('com.projectgoth:id/txt_username');el.value = 'praveenmukilan';return 0;}catch{return 1;}");
-//driver.findElement(By.id("com.projectgoth:id/txt_username")).sendKeys("praveenmukilan");
-//driver.findElementByAccessibilityId("txt_username").sendKeys("praveenmukilan");
-//driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.EditText[2]")).sendKeys("60se!inMS");
-//driver.findElementById(OR.getProperty("password_id")).sendKeys(password);
-//driver.findElementByAccessibilityId("txt_password").sendKeys(password);
-
-//The below code is not working in API level <19  -- added 16Feb2015
-//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_password\")")).sendKeys(password);
-//The above code is not working in API level <19  -- added 16Feb2015
-
-driver.findElementById("com.projectgoth:id/txt_password").sendKeys(password);
-
-//MobileElement me = (MobileElement)driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_password\")"));
-//me.click();
-//sendKeysUsingADB(password);
-//***************************
-
-//alternative approach instead of sendkeys //192.168.56.101:5555
-//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_password\")")).click();
-//Process user = Runtime.getRuntime().exec("adb -s 192.168.56.101:5555 shell input text "+username);
-//System.out.println("password : "+password);
-//ProcessBuilder pbPass = new ProcessBuilder("adb", "-s", "192.168.56.101:5555", "shell", "input","text", "60se!inMS");
-//Process pcPass = pbPass.start();
-//
-//Thread.sleep(15000);
-////pcPass.waitFor();
-
-
-System.out.println("Done");
-//***************************
-
-
-
-/*
-MobileElement password = (MobileElement)driver.findElement(By.id("com.projectgoth:id/txt_password"));
-password.setValue("60se!inMS");
-*/
-//driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.Button[2]")).click();
-driver.findElement(By.id("com.projectgoth:id/btn_signin")).click();
-
-//driver.findElement(By.id("com.projectgoth:id/txt_username"));
-//driver.findElement(MobileBy.ByAndroidUIAutomator.)
-//WebDriverWait wait = new WebDriverWait(driver, 180);
-Thread.sleep(20000);
-	
-}
 
 public static void sendKeysUsingADB(String textString) throws ExecuteException, IOException{
 	
