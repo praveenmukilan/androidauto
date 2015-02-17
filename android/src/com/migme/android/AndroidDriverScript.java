@@ -326,7 +326,7 @@ public class AndroidDriverScript{
 	public static WebElement waitForElementPresent(final By by, int timeOutInSeconds) {
 
         WebElement element; 
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); //nullify implicitlyWait() 
+//        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); //nullify implicitlyWait() 
         try{
         	
             WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds); 
