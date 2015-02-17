@@ -375,7 +375,7 @@ public class AndroidDriverScript{
             WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds); 
             element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
 
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); //reset implicitlyWait
+            driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS); //reset implicitlyWait
             return true; //return the element
         } catch (Exception e) {
             return false;
@@ -468,13 +468,19 @@ public static void startNewChat(){
 	System.out.println("*****************startNewChat*********************");
 	
 //	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("mainBtn")), 20).click();
-	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
+	
+
+	while(!isElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatBtn")), 10)){
+		System.out.print("**");
+		driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
+		}
 
 //	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatBtn")), 15).click();
 	driver.findElementByAccessibilityId(OR.getProperty("chatBtn")).click();
 	//main button click to view the new private group chat icon
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 //	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("mainBtn")), 10).click();
+	
 	
 //	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("newChatBtn")), 15).click();
 	driver.findElementByAccessibilityId(OR.getProperty("newChatBtn")).click();
