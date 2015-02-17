@@ -1,6 +1,8 @@
 package com.migme.android;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+import com.migme.util.Constants;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
@@ -9,6 +11,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +32,8 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteException;
 import org.bouncycastle.asn1.cms.Time;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.CapabilityType;
@@ -42,6 +47,9 @@ import org.testng.annotations.Test;
 
 
 
+
+
+
 public class AndroidDriverScript{
 
 	public static AppiumDriver driver;
@@ -50,9 +58,11 @@ public class AndroidDriverScript{
 	public static WebDriverWait wait;
 	public static String username;
 	public static String password;
+	public static int screenShotIndx=0;
 	
 	static DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
 	static DefaultExecutor executor = new DefaultExecutor();
+	private static  String ssPath;
 	public static void signIn() throws IOException, InterruptedException{
 		
 
@@ -139,7 +149,7 @@ public class AndroidDriverScript{
 		System.out.println("Done");
 		//***************************
 
-
+   
 
 		/*
 		MobileElement password = (MobileElement)driver.findElement(By.id("com.projectgoth:id/txt_password"));
@@ -147,7 +157,7 @@ public class AndroidDriverScript{
 		*/
 		//driver.findElement(By.xpath("//android.view.View[1]/android.widget.FrameLayout[1]/android.widget.RelativeLayout[1]/android.widget.FrameLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]/android.widget.LinearLayout[1]/android.widget.Button[2]")).click();
 		driver.findElement(By.id("com.projectgoth:id/btn_signin")).click();
-
+		takeScreenShot();
 		//driver.findElement(By.id("com.projectgoth:id/txt_username"));
 		//driver.findElement(MobileBy.ByAndroidUIAutomator.)
 		//WebDriverWait wait = new WebDriverWait(driver, 180);
@@ -365,7 +375,7 @@ public static void postText(){
 	driver.findElementByAccessibilityId(OR.getProperty("postBtn")).click();		
 	driver.findElementById(OR.getProperty("postTextField")).sendKeys(RandomStringUtils.randomAlphabetic(100));
 	driver.findElementByAccessibilityId(OR.getProperty("postSendBtn")).click();		
-	
+	takeScreenShot();
 }
 
 public static void postImage(){
@@ -385,7 +395,8 @@ public static void postImage(){
 		System.out.println("Camera is not working. Please check");
 	
 	driver.findElementById(OR.getProperty("postTextField")).sendKeys(RandomStringUtils.randomAlphabetic(100));
-	driver.findElementByAccessibilityId(OR.getProperty("postSendBtn")).click();	
+	driver.findElementByAccessibilityId(OR.getProperty("postSendBtn")).click();
+	takeScreenShot();
 }
 
 public static void postEmoticons(){
@@ -399,7 +410,7 @@ public static void postEmoticons(){
 
 //	driver.findElementById(OR.getProperty("postTextField")).sendKeys(OR.getProperty("postTextLT300"));
 	driver.findElementByAccessibilityId(OR.getProperty("postSendBtn")).click();		
-	
+	takeScreenShot();
 }
 
 
@@ -509,6 +520,7 @@ public static void sendGiftInChat(){
 
 	driver.findElementById(OR.getProperty("chatGiftSend")).click();
 	waitForSecs(3);
+	takeScreenShot();
 	driver.findElementByAccessibilityId(OR.getProperty("chatGiftSentCloseBtn")).click();
 	
 }
@@ -579,6 +591,31 @@ public static void waitForSecs(int seconds){
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
+}
+
+
+
+public static void takeScreenShot(){
+   screenShotIndx++;
+   
+  if(screenShotIndx==0) {
+  File ssDir= new File(Constants.screenShotDir+"//"+System.currentTimeMillis());
+  ssDir.mkdirs();
+   ssPath = ssDir.getAbsolutePath();
+  }
+  
+	
+	File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+	// Now you can do whatever you need to do with it, for example copy somewhere
+	try {
+		FileUtils.copyFile(scrFile, new File(ssPath+"//"+screenShotIndx+".jpg"));
+//		FileUtils.copyFile(scrFile, new File(Constants.screenShotDir+"//"+DriverScript.sTestCaseID+"_"+DriverScript.sTestStepName+".jpg"));
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	
 }
 
 public static void signOut(){
