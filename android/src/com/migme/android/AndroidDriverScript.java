@@ -456,16 +456,17 @@ public static void chatToFeedPage(){
 public static void startNewChat() throws InterruptedException{
 	System.out.println("*****************startNewChat*********************");
 	
-	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("mainBtn")), 20).click();
-//	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
+//	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("mainBtn")), 20).click();
+	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 
-	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatBtn")), 15).click();
-//	driver.findElementByAccessibilityId(OR.getProperty("chatBtn")).click();
+//	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatBtn")), 15).click();
+	driver.findElementByAccessibilityId(OR.getProperty("chatBtn")).click();
 	//main button click to view the new private group chat icon
-	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("mainBtn")), 10).click();
+	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
+//	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("mainBtn")), 10).click();
 	
-	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("newChatBtn")), 15).click();
-//	driver.findElementByAccessibilityId(OR.getProperty("newChatBtn")).click();
+//	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("newChatBtn")), 15).click();
+	driver.findElementByAccessibilityId(OR.getProperty("newChatBtn")).click();
 	
 	 
 
