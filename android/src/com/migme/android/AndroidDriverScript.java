@@ -405,6 +405,8 @@ public static void postText(){
 }
 
 public static void postImage(){
+	
+	try{
 	System.out.println("****************postImage()****************");
 	
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();	
@@ -423,6 +425,13 @@ public static void postImage(){
 	driver.findElementById(OR.getProperty("postTextField")).sendKeys(RandomStringUtils.randomAlphabetic(100));
 	driver.findElementByAccessibilityId(OR.getProperty("postSendBtn")).click();
 	takeScreenShot();
+	}
+    catch(Exception e){
+    	
+    	return;
+    }
+	
+	
 }
 
 public static void postEmoticons(){
@@ -482,7 +491,7 @@ public static void sleepDriver(int secs) throws InterruptedException{
 
 public static void privateChat() throws InterruptedException{
 	System.out.println("*****************privateChat starts*********************");
-    Thread.sleep(10000);
+//    Thread.sleep(10000);
  startNewChat();
 
  driver.findElementById(OR.getProperty("chatUserNamesList")).click();
