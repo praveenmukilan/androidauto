@@ -477,10 +477,12 @@ public static void startNewChat(){
 
 //	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatBtn")), 15).click();
 	driver.findElementByAccessibilityId(OR.getProperty("chatBtn")).click();
-	//main button click to view the new private group chat icon
-	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
-//	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("mainBtn")), 10).click();
 	
+	//main button click to view the new private group chat icon
+	while(!isElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatBtn")), 10)){
+		System.out.print("**");
+		driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
+		}
 	
 //	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("newChatBtn")), 15).click();
 	driver.findElementByAccessibilityId(OR.getProperty("newChatBtn")).click();
