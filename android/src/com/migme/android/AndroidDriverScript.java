@@ -462,7 +462,9 @@ public static void chatToFeedPage(){
 	driver.findElementByAccessibilityId(OR.getProperty("feedBtn")).click();
 
 }
-public static void startNewChat() throws InterruptedException{
+public static void startNewChat(){
+	
+	try{
 	System.out.println("*****************startNewChat*********************");
 	
 //	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("mainBtn")), 20).click();
@@ -477,10 +479,17 @@ public static void startNewChat() throws InterruptedException{
 //	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("newChatBtn")), 15).click();
 	driver.findElementByAccessibilityId(OR.getProperty("newChatBtn")).click();
 	
-	 
+	 retry=0;
 
 	//driver.findElementByAccessibilityId("chat_list_tab").click();
-
+	}catch(Exception e){
+		retry++;
+		if(retry<=3){
+			chatToFeedPage();
+			startNewChat();
+		}
+		
+	}
 	
 }
 
