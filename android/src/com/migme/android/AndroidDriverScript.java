@@ -521,7 +521,8 @@ public static void sendGiftInChat(){
 	driver.findElementById(OR.getProperty("chatGiftSend")).click();
 	waitForSecs(3);
 	takeScreenShot();
-	driver.findElementByAccessibilityId(OR.getProperty("chatGiftSentCloseBtn")).click();
+	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatGiftSentCloseBtn")), 5);
+//	driver.findElementByAccessibilityId(OR.getProperty("chatGiftSentCloseBtn")).click();
 	
 }
 
