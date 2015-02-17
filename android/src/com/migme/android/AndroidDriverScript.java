@@ -399,7 +399,7 @@ public static void postText(){
 	System.out.println("*****postText()****************");
 			
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();	
-	while(isElementPresent(MobileBy.AccessibilityId(OR.getProperty("postBtn")), 5)){
+	while(!isElementPresent(MobileBy.AccessibilityId(OR.getProperty("postBtn")), 5)){
 		driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 	}
 	
@@ -415,7 +415,7 @@ public static void postImage(){
 	System.out.println("*****postImage()****************");
 	
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();	
-	while(isElementPresent(MobileBy.AccessibilityId(OR.getProperty("postBtn")), 5)){
+	while(!isElementPresent(MobileBy.AccessibilityId(OR.getProperty("postBtn")), 5)){
 		driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 	}
 	driver.findElementByAccessibilityId(OR.getProperty("postBtn")).click();		
@@ -446,7 +446,7 @@ public static void postEmoticons(){
 	System.out.println("*****postEmoticons()****************");
 
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();	
-	while(isElementPresent(MobileBy.AccessibilityId(OR.getProperty("postBtn")), 5)){
+	while(!isElementPresent(MobileBy.AccessibilityId(OR.getProperty("postBtn")), 5)){
 		driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 	}
 	
