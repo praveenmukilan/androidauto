@@ -430,7 +430,7 @@ public static void chatToFeedPage(){
 public static void startNewChat() throws InterruptedException{
 	System.out.println("*****************startNewChat*********************");
 	
-	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("mainBtn")), 10).click();
+	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("mainBtn")), 20).click();
 //	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 
 	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatBtn")), 15).click();
@@ -596,14 +596,14 @@ public static void waitForSecs(int seconds){
 
 
 public static void takeScreenShot(){
-   screenShotIndx++;
+  
    
   if(screenShotIndx==0) {
   File ssDir= new File(Constants.screenShotDir+"//"+System.currentTimeMillis());
   ssDir.mkdirs();
    ssPath = ssDir.getAbsolutePath();
   }
-  
+  screenShotIndx++;
 	
 	File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 	// Now you can do whatever you need to do with it, for example copy somewhere
