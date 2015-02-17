@@ -35,6 +35,7 @@ import org.bouncycastle.asn1.cms.Time;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
+import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -294,7 +295,7 @@ public class AndroidDriverScript{
 		
 	
 	
-//		driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
+		driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
 		
 
 		System.out.println("****************setUp Ends****************");
@@ -318,23 +319,30 @@ public class AndroidDriverScript{
 //		stopAppium();
 		System.out.println("****************main Ends****************");
 		}
+
+		catch(SessionNotCreatedException e){
+			//rerun the tests again. probably the server is not started.
+			main();
+		}
 		catch(Exception e){
 			
 			System.out.println(e);
+
 		}
+		
 		
 	}
 	
 	public static WebElement waitForElementPresent(final By by, int timeOutInSeconds) {
 
         WebElement element; 
-//        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); //nullify implicitlyWait() 
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); //nullify implicitlyWait() 
         try{
         	
             WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds); 
             element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
 
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); //reset implicitlyWait
+            driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS); //reset implicitlyWait
             return element; //return the element
         } catch (Exception e) {
             e.printStackTrace();
