@@ -544,7 +544,12 @@ public static void privateChat() throws InterruptedException{
 }
 
 public static void chooseGiftInChat(){
+	
 	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatGiftIcon")),3).click();
+	
+	while(isElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatGiftPrice3Cents")),5)){
+		driver.findElementByAccessibilityId(OR.getProperty("chatGiftIcon")).click();
+	}
 //	driver.findElementByAccessibilityId(OR.getProperty("chatGiftIcon")).click();
 	waitForSecs(5);
 	chooseGiftInOrder();
