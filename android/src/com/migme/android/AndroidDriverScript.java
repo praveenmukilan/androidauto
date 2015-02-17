@@ -479,7 +479,7 @@ public static void startNewChat(){
 	driver.findElementByAccessibilityId(OR.getProperty("chatBtn")).click();
 	
 	//main button click to view the new private group chat icon
-	while(!isElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatBtn")), 10)){
+	while(!isElementPresent(MobileBy.AccessibilityId(OR.getProperty("newChatBtn")), 10)){
 		System.out.print("**");
 		driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 		}
