@@ -62,13 +62,14 @@ public class AndroidDriverScript{
 	public static String username;
 	public static String password;
 	public static int screenShotIndx=0;
+	public static int retry=0;
 	
 	static DefaultExecuteResultHandler resultHandler = new DefaultExecuteResultHandler();
 	static DefaultExecutor executor = new DefaultExecutor();
 	private static  String ssPath;
-	public static void signIn() throws IOException, InterruptedException{
+	public static void signIn() throws Exception{
 		
-
+   try{
 		/*
 		WebDriverWait wait = new WebDriverWait(driver, 30); 
 		wait.until(ExpectedConditions.elementToBeClickable(By.id("com.projectgoth:id/txt_username")));
@@ -165,6 +166,12 @@ public class AndroidDriverScript{
 		//driver.findElement(MobileBy.ByAndroidUIAutomator.)
 		//WebDriverWait wait = new WebDriverWait(driver, 180);
 		Thread.sleep(Long.parseLong(OR.getProperty("mainBtnWaitSecs")));
+	
+   }
+   catch(NoSuchElementException e){
+  
+	   
+   }
 			
 		}
 	
@@ -177,11 +184,13 @@ public class AndroidDriverScript{
 	}
 	
 	public static void test01() throws InterruptedException, IOException {
+		
+		try{
 //		System.out.println("Jesus");
 		//AndroidDriver andy = (AndroidDriver)driver;
 		System.out.println("****************test01 Starts****************");
 //
-		signIn();
+
 
 //		wait.until(ExpectedConditions.elementToBeClickable(By.id("com.projectgoth:id/main_button")));
 
@@ -197,7 +206,12 @@ public class AndroidDriverScript{
 
 
 		System.out.println("****************test01 Ends****************");
-
+		}
+		catch(NoSuchElementException e){
+			retry++;
+			if(retry<=3)
+				test01();
+		}
 		 }
 	
 	public static void setUp() throws Exception {
@@ -299,6 +313,8 @@ public class AndroidDriverScript{
 		
 
 		System.out.println("****************setUp Ends****************");
+		
+//		signIn();
 }
 	
 
@@ -336,10 +352,10 @@ public class AndroidDriverScript{
 	public static WebElement waitForElementPresent(final By by, int timeOutInSeconds) {
 
         WebElement element; 
-        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); //nullify implicitlyWait() 
+//        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); //nullify implicitlyWait() 
         try{
         	
-            WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds); 
+            WebDriverWait wait = new WebDriverWait(driver, 80); 
             element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
 
             driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS); //reset implicitlyWait
@@ -531,7 +547,7 @@ public static void sendGiftInChat(){
 	driver.findElementById(OR.getProperty("chatGiftSend")).click();
 	waitForSecs(3);
 	takeScreenShot();
-	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatGiftSentCloseBtn")), 5);
+	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatGiftSentCloseBtn")), 5).click();
 //	driver.findElementByAccessibilityId(OR.getProperty("chatGiftSentCloseBtn")).click();
 
 }
