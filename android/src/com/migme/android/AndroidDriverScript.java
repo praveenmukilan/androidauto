@@ -299,7 +299,7 @@ public class AndroidDriverScript{
 		capabilities.setCapability("deviceName", "device");
 		
 		driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"),capabilities);
-		wait = new WebDriverWait(driver, 30);
+		
 		System.out.println("****");
 	
 	
@@ -395,7 +395,7 @@ public static void tearDown() throws Exception {
 }
 
 public static void postText(){
-	System.out.println("****************postText()****************");
+	System.out.println("*****postText()****************");
 			
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();	
 	driver.findElementByAccessibilityId(OR.getProperty("postBtn")).click();		
@@ -407,7 +407,7 @@ public static void postText(){
 public static void postImage(){
 	
 	try{
-	System.out.println("****************postImage()****************");
+	System.out.println("*****postImage()****************");
 	
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();	
 	driver.findElementByAccessibilityId(OR.getProperty("postBtn")).click();		
@@ -435,7 +435,7 @@ public static void postImage(){
 }
 
 public static void postEmoticons(){
-	System.out.println("****************postEmoticons()****************");
+	System.out.println("*****postEmoticons()****************");
 
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();	
 	driver.findElementByAccessibilityId(OR.getProperty("postBtn")).click();		
@@ -486,7 +486,7 @@ public static void startNewChat(){
 	driver.findElementByAccessibilityId(OR.getProperty("newChatBtn")).click();
 	
 	 retry=0;
-
+	 System.out.println("*****************startNewChat ends*********************");
 	//driver.findElementByAccessibilityId("chat_list_tab").click();
 	}catch(Exception e){
 		retry++;
@@ -505,7 +505,7 @@ public static void sleepDriver(int secs) throws InterruptedException{
 
 
 public static void privateChat() throws InterruptedException{
-	System.out.println("*****************privateChat starts*********************");
+	System.out.println("*****privateChat starts*********************");
 //    Thread.sleep(10000);
  startNewChat();
 
@@ -524,7 +524,7 @@ public static void privateChat() throws InterruptedException{
 	driver.findElementByAccessibilityId(OR.getProperty("chatSend")).click();
 	
 	chatToFeedPage();
-	System.out.println("*****************privateChat ends*********************");
+	System.out.println("*****privateChat ends*********************");
 
 }
 
@@ -615,7 +615,7 @@ public static void postEmoticonInChat(){
 }
 
 public static void newGroupChat() throws InterruptedException{
-	System.out.println("*****************newGroupChat starts*********************");
+	System.out.println("*****newGroupChat starts*********************");
 	startNewChat();
 	   // 1. Click Main Button
 	   // 2. Click the New Chat Icon
