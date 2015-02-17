@@ -208,9 +208,10 @@ public class AndroidDriverScript{
 		System.out.println("****************test01 Ends****************");
 		}
 		catch(NoSuchElementException e){
-			retry++;
-			if(retry<=3)
-				test01();
+			e.printStackTrace();
+//			retry++;
+//			if(retry<=3)
+//				test01();
 		}
 		 }
 	
