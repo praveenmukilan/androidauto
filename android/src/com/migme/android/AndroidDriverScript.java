@@ -2,6 +2,7 @@ package com.migme.android;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.RandomStringUtils;
+
 import com.migme.util.Constants;
 
 import io.appium.java_client.AppiumDriver;
@@ -32,6 +33,7 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteException;
 import org.bouncycastle.asn1.cms.Time;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -523,20 +525,38 @@ public static void sendGiftInChat(){
 	takeScreenShot();
 	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatGiftSentCloseBtn")), 5);
 //	driver.findElementByAccessibilityId(OR.getProperty("chatGiftSentCloseBtn")).click();
-	
+
 }
 
 public static void sendGiftInPrivateChat(){
-	
+	try{
 	chooseGiftInChat();
 	sendGiftInChat();
+	}
+	catch(NoSuchElementException e){
+		
+		System.out.println("element could not be found :");
+		e.printStackTrace();
+		return;
+	}
 }
 
 public static void sendGiftInGroupChat(){
-	chooseGiftInChat();
+	
+	try{
+		chooseGiftInChat();
+	
 	selectUserForGift();
 	clickNextButtonChatGift();
 	sendGiftInChat();
+	}
+	
+	catch(NoSuchElementException e){
+		
+		System.out.println("element could not be found :");
+		e.printStackTrace();
+		return;
+	}
 }
 
 public static void postEmoticonInChat(){
