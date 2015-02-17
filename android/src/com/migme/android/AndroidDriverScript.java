@@ -468,7 +468,7 @@ public static void startNewChat(){
 	System.out.println("*****************startNewChat*********************");
 	
 //	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("mainBtn")), 20).click();
-	
+	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 
 	while(!isElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatBtn")), 10)){
 		System.out.print("**");
@@ -479,6 +479,7 @@ public static void startNewChat(){
 	driver.findElementByAccessibilityId(OR.getProperty("chatBtn")).click();
 	
 	//main button click to view the new private group chat icon
+	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 	while(!isElementPresent(MobileBy.AccessibilityId(OR.getProperty("newChatBtn")), 10)){
 		System.out.print("**");
 		driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
@@ -574,7 +575,9 @@ public static void sendGiftInChat(){
 	driver.findElementById(OR.getProperty("chatGiftSend")).click();
 	waitForSecs(3);
 	takeScreenShot();
-	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatGiftSentCloseBtn")), 5).click();
+	
+	if(isElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatGiftSentCloseBtn")),5))
+	     waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatGiftSentCloseBtn")), 5).click();
 //	driver.findElementByAccessibilityId(OR.getProperty("chatGiftSentCloseBtn")).click();
 
 }
