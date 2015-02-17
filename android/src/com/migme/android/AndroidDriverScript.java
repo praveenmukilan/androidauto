@@ -29,6 +29,7 @@ import org.apache.commons.exec.DefaultExecutor;
 import org.apache.commons.exec.ExecuteException;
 import org.bouncycastle.asn1.cms.Time;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -84,9 +85,14 @@ public class AndroidDriverScript{
 		//driver.findElementByAccessibilityId("txt_username").clear();
 
 		//driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")")).clear();
+		
+		//wait for app to load & username field to appear
+		
+		
 
 		//The below code is not working in API level <19
-		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")")).sendKeys(username);
+		waitForElementPresent( MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")"), 10).sendKeys(username);
+//		driver.findElement(MobileBy.AndroidUIAutomator("new UiSelector().resourceId(\"com.projectgoth:id/txt_username\")")).sendKeys(username);
 //		driver.findElement(MobileBy.AndroidUIAutomator("new UiObject(new UiSelector().resourceId(\"com.projectgoth:id/txt_username\"))")).sendKeys(username);
 	
 	
@@ -307,7 +313,39 @@ public class AndroidDriverScript{
 		
 	}
 	
+	public static WebElement waitForElementPresent(final By by, int timeOutInSeconds) {
 
+        WebElement element; 
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); //nullify implicitlyWait() 
+        try{
+        	
+            WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds); 
+            element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
+
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); //reset implicitlyWait
+            return element; //return the element
+        } catch (Exception e) {
+            e.printStackTrace();
+        } 
+        return null; 
+    }
+	
+ public static Boolean isElementPresent(final By by, int timeOutInSeconds) {
+
+        WebElement element; 
+        driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); //nullify implicitlyWait() 
+        try{
+        	
+            WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds); 
+            element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
+
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); //reset implicitlyWait
+            return true; //return the element
+        } catch (Exception e) {
+            return false;
+        } 
+    
+    }
 
 @AfterMethod
 public static void tearDown() throws Exception {
@@ -321,7 +359,7 @@ public static void tearDown() throws Exception {
 }
 
 public static void postText(){
-	
+	System.out.println("****************postText()****************");
 			
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();	
 	driver.findElementByAccessibilityId(OR.getProperty("postBtn")).click();		
@@ -331,6 +369,7 @@ public static void postText(){
 }
 
 public static void postImage(){
+	System.out.println("****************postImage()****************");
 	
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();	
 	driver.findElementByAccessibilityId(OR.getProperty("postBtn")).click();		
@@ -339,13 +378,18 @@ public static void postImage(){
 	
 	driver.findElementById(OR.getProperty("shutterBtn")).click();
 	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	
+	if(isElementPresent(MobileBy.id(OR.getProperty("doneBtn")), 10))
 	driver.findElementById(OR.getProperty("doneBtn")).click();
+	else
+		System.out.println("Camera is not working. Please check");
+	
 	driver.findElementById(OR.getProperty("postTextField")).sendKeys(RandomStringUtils.randomAlphabetic(100));
 	driver.findElementByAccessibilityId(OR.getProperty("postSendBtn")).click();	
 }
 
 public static void postEmoticons(){
-	
+	System.out.println("****************postEmoticons()****************");
 
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();	
 	driver.findElementByAccessibilityId(OR.getProperty("postBtn")).click();		
@@ -374,15 +418,17 @@ public static void chatToFeedPage(){
 }
 public static void startNewChat() throws InterruptedException{
 	System.out.println("*****************startNewChat*********************");
-	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
+	
+	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("mainBtn")), 10).click();
+//	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 
-
-	driver.findElementByAccessibilityId(OR.getProperty("chatBtn")).click();
+	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatBtn")), 10).click();
+//	driver.findElementByAccessibilityId(OR.getProperty("chatBtn")).click();
 	//main button click to view the new private group chat icon
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 	
-	Thread.sleep(5000);
-	driver.findElementByAccessibilityId(OR.getProperty("newChatBtn")).click();
+	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("newChatBtn")), 10).click();
+//	driver.findElementByAccessibilityId(OR.getProperty("newChatBtn")).click();
 	
 	 
 
@@ -421,8 +467,8 @@ public static void privateChat() throws InterruptedException{
 }
 
 public static void chooseGiftInChat(){
-	
-	driver.findElementByAccessibilityId(OR.getProperty("chatGiftIcon")).click();
+	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatGiftIcon")),3).click();
+//	driver.findElementByAccessibilityId(OR.getProperty("chatGiftIcon")).click();
 	waitForSecs(5);
 	chooseGiftInOrder();
 //	chooseGiftInRandom();
@@ -430,6 +476,7 @@ public static void chooseGiftInChat(){
 }
 
 public static void chooseGiftInOrder(){
+	
 	driver.findElementById(OR.getProperty("chatGiftPrice3Cents")).click();
 	
 }

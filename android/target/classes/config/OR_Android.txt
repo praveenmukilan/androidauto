@@ -7,7 +7,10 @@ username=bWlnMXByYXZlZW4=
 #praveenmukilan
 #username=cHJhdmVlbm11a2lsYW4=
 
-mainBtnWaitSecs=30
+mainBtnWaitSecs=60
+
+#Common
+appLauncher=Apps
 
 
 password_id=com.projectgoth:id/txt_password
