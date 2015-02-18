@@ -446,6 +446,7 @@ public static void postImage(){
     	}
     	else
     	{
+    		System.out.println("Retried three times. Post Image has issues. Please check.!");
     		return;
     	}
     	
@@ -456,7 +457,7 @@ public static void postImage(){
 }
 
 public static void goBack(){
-	
+	System.out.println("****************go back()*************");
 	driver.navigate().back();
 }
 
