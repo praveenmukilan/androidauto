@@ -404,7 +404,7 @@ public static void postText(){
 	}
 	
 	driver.findElementByAccessibilityId(OR.getProperty("postBtn")).click();		
-	driver.findElementById(OR.getProperty("postTextField")).sendKeys(RandomStringUtils.randomAlphabetic(100));
+	driver.findElementById(OR.getProperty("postTextField")).sendKeys("posttext @ "+RandomStringUtils.randomAlphabetic(100));
 	driver.findElementByAccessibilityId(OR.getProperty("postSendBtn")).click();		
 	takeScreenShot();
 }
@@ -433,14 +433,31 @@ public static void postImage(){
 	driver.findElementById(OR.getProperty("postTextField")).sendKeys(RandomStringUtils.randomAlphabetic(100));
 	driver.findElementByAccessibilityId(OR.getProperty("postSendBtn")).click();
 	takeScreenShot();
+	retry=0;
 	}
     catch(Exception e){
+    	goBack();
+    
     	//add camera cancel button, so that the next function postemoticons can work
+    	retry++;
+    	if(retry<=3){
+    		System.out.println("Retrying Post Image..");
+    		postImage();
+    	}
+    	else
+    	{
+    		return;
+    	}
     	
-    	return;
+ 
     }
 	
 	
+}
+
+public static void goBack(){
+	
+	driver.navigate().back();
 }
 
 public static void postEmoticons(){
@@ -539,7 +556,7 @@ public static void privateChat() throws InterruptedException{
 
  sendGiftInPrivateChat();
 
-	driver.findElementById(OR.getProperty("chatTextField")).sendKeys("hi @ "+getCurrentTimeStamp());
+	driver.findElementById(OR.getProperty("chatTextField")).sendKeys("private chat - hi @ "+getCurrentTimeStamp());
 
 	driver.findElementByAccessibilityId(OR.getProperty("chatSend")).click();
 	
@@ -672,7 +689,7 @@ public static void newGroupChat() throws InterruptedException{
 	postEmoticonInChat();
 	
 	
-	driver.findElementById(OR.getProperty("chatTextField")).sendKeys("hi @ "+getCurrentTimeStamp());
+	driver.findElementById(OR.getProperty("chatTextField")).sendKeys("groupchat hi @ "+getCurrentTimeStamp());
 
 	driver.findElementByAccessibilityId(OR.getProperty("chatSend")).click();
 
