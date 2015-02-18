@@ -435,6 +435,7 @@ public static void postImage(){
 	takeScreenShot();
 	}
     catch(Exception e){
+    	//add camera cancel button, so that the next function postemoticons can work
     	
     	return;
     }
@@ -672,7 +673,7 @@ public static void newGroupChat() throws InterruptedException{
 	driver.findElementByAccessibilityId(OR.getProperty("chatSend")).click();
 
 	chatToFeedPage();
-	System.out.println("*****************newGroupChat ends*********************");
+	System.out.println("*****newGroupChat ends*********************");
 }
 
 public static void waitForSecs(int seconds){
@@ -713,7 +714,7 @@ public static void takeScreenShot(){
 public static void signOut(){
 	
 	
-	System.out.println("*****************SignOut*********************");
+	System.out.println("*****SignOut*********************");
 	// to navigate to menu settings window
 	driver.findElement(By.id("com.projectgoth:id/button_icon")).click();
 
