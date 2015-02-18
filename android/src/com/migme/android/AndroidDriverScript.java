@@ -42,6 +42,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.openqa.selenium.remote.UnreachableBrowserException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
@@ -217,6 +218,8 @@ public class AndroidDriverScript{
 	
 	public static void setUp() throws Exception {
 		
+		try{
+		
 		Properties prop = new Properties();
 		Properties apkFile = new Properties();
 		OR = new Properties();
@@ -316,6 +319,14 @@ public class AndroidDriverScript{
 		System.out.println("****************setUp Ends****************");
 		
 //		signIn();
+		retry=0;
+		
+	}catch(UnreachableBrowserException unbe){
+//		
+//		retry++;
+//		if(retry<=3)
+//		setUp();
+	}
 }
 	
 
@@ -514,7 +525,7 @@ public static void startNewChat(){
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 
 	while(!isElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatBtn")), 10)){
-		System.out.print("**");
+		System.out.print("**inwhile -navigation button");
 		driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 		}
 
@@ -524,7 +535,7 @@ public static void startNewChat(){
 	//main button click to view the new private group chat icon
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 	while(!isElementPresent(MobileBy.AccessibilityId(OR.getProperty("newChatBtn")), 10)){
-		System.out.print("**");
+		System.out.print("**inwhile- ad chatadd white ");
 		driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 		}
 	

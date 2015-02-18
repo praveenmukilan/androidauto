@@ -38,6 +38,7 @@ emoticonItem=//android.widget.LinearLayout[1]/android.widget.FrameLayout[1]/andr
 cameraOption=//android.widget.TextView[@text='Camera']
 shutterBtn=com.android.camera:id/review_control
 doneBtn=com.android.camera:id/btn_done
+cameraBtnCancel=com.android.camera:id/btn_cancel
 
 
 #Chats Page
