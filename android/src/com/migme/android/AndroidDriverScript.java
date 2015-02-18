@@ -471,6 +471,10 @@ public static void chatToFeedPage(){
 
 	//to navigate back to feed screen, click main button & click on feed button
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
+	while(!isElementPresent(MobileBy.AccessibilityId(OR.getProperty("feedBtn")), 10)){
+		System.out.print("**");
+		driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
+		}
 
 	driver.findElementByAccessibilityId(OR.getProperty("feedBtn")).click();
 
