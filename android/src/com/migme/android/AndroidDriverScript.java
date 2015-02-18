@@ -485,7 +485,10 @@ public static void postEmoticons(){
 public static void chatToFeedPage(){
 	System.out.println("*****************chatToFeedPage*********************");
 	//to navigate back from chat window
-	driver.findElementByAccessibilityId(OR.getProperty("chatBackBtn")).click();
+	
+	//if the current page is recent chats, then the chatBackBtn is not available.
+	if(isElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatBackBtn")), 10))
+	      driver.findElementByAccessibilityId(OR.getProperty("chatBackBtn")).click();
 
 	//to navigate back to feed screen, click main button & click on feed button
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
