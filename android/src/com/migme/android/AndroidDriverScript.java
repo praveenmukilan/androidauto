@@ -426,9 +426,12 @@ public static void postImage(){
 	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	
 	if(isElementPresent(MobileBy.id(OR.getProperty("doneBtn")), 10))
-	driver.findElementById(OR.getProperty("doneBtn")).click();
-	else
+	    driver.findElementById(OR.getProperty("doneBtn")).click();
+	else{
 		System.out.println("Camera is not working. Please check");
+	    driver.findElementById(OR.getProperty("cameraBtnCancel")).click();
+	    System.out.println("image could not be taken using camera. pls check!");
+		}
 	
 	driver.findElementById(OR.getProperty("postTextField")).sendKeys(RandomStringUtils.randomAlphabetic(100));
 	driver.findElementByAccessibilityId(OR.getProperty("postSendBtn")).click();
@@ -437,6 +440,8 @@ public static void postImage(){
 	}
     catch(Exception e){
     	goBack();
+    	
+    	
     
     	//add camera cancel button, so that the next function postemoticons can work
     	retry++;
