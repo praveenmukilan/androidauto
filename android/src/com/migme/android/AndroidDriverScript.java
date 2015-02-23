@@ -619,12 +619,12 @@ public static void privateChat() throws InterruptedException{
 //	//driver.findElementById("com.projectgoth:id/container").click();
 //
 //	driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
- postEmoticonInChat();
+
 
 // sendGiftInPrivateChat();
 
 	driver.findElementById(OR.getProperty("chatTextField")).sendKeys("private chat - hi @ "+getCurrentTimeStamp());
-
+	 postEmoticonInChat();
 	driver.findElementByAccessibilityId(OR.getProperty("chatSend")).click();
 	
 	chatToFeedPage();
