@@ -489,12 +489,13 @@ public static void postImage(){
 	retry=0;
 	}
     catch(Exception e){
+    	//==this code makes the driver come out of the migme app. need to fix. infinite loop
     	
     	while(!isElementPresent(MobileBy.AccessibilityId(OR.getProperty("mainBtn")), 10)){
-    		goBack();    		
+        	driver.launchApp();  		
     	}
     	
-    	
+
     	
     
     	//add camera cancel button, so that the next function postemoticons can work
