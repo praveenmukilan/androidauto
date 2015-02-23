@@ -318,7 +318,7 @@ public class AndroidDriverScript{
 
 		System.out.println("****************setUp Ends****************");
 		
-//		signIn();
+		signIn();
 		retry=0;
 		
 	}catch(UnreachableBrowserException unbe){
@@ -386,6 +386,7 @@ public class AndroidDriverScript{
         	
             WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds); 
             element = wait.until(ExpectedConditions.presenceOfElementLocated(by));
+            
 
             driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS); //reset implicitlyWait
             return true; //return the element
@@ -394,6 +395,24 @@ public class AndroidDriverScript{
         } 
     
     }
+ 
+ public static Boolean isElementClickable(final By by, int timeOutInSeconds) {
+
+     WebElement element; 
+     driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS); //nullify implicitlyWait() 
+     try{
+     	
+         WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds); 
+         element = wait.until(ExpectedConditions.elementToBeClickable(by));
+         
+
+         driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS); //reset implicitlyWait
+         return true; //return the element
+     } catch (Exception e) {
+         return false;
+     } 
+ 
+ }
 
 @AfterMethod
 public static void tearDown() throws Exception {
@@ -421,7 +440,7 @@ public static void postText(){
 }
 
 public static void postImage(){
-	
+	//camera button differs between emulator & real device
 	try{
 	System.out.println("*****postImage()****************");
 	
@@ -450,19 +469,24 @@ public static void postImage(){
 	retry=0;
 	}
     catch(Exception e){
-    	goBack();
+    	
+    	while(!isElementPresent(MobileBy.AccessibilityId(OR.getProperty("mainBtn")), 10)){
+    		goBack();    		
+    	}
+    	
     	
     	
     
     	//add camera cancel button, so that the next function postemoticons can work
     	retry++;
-    	if(retry<=3){
+    	if(retry<=2){
     		System.out.println("Retrying Post Image..");
     		postImage();
     	}
     	else
     	{
     		System.out.println("Retried three times. Post Image has issues. Please check.!");
+    		
     		return;
     	}
     	
@@ -485,10 +509,12 @@ public static void postEmoticons(){
 		driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 	}
 	
-	driver.findElementByAccessibilityId(OR.getProperty("postBtn")).click();		
-	driver.findElementByAccessibilityId(OR.getProperty("emoticonBtn")).click();	
+	driver.findElementByAccessibilityId(OR.getProperty("postBtn")).click();
 	driver.findElementById(OR.getProperty("postTextField")).sendKeys(RandomStringUtils.randomAlphabetic(200));
+	driver.findElementByAccessibilityId(OR.getProperty("emoticonBtn")).click();	
+	
 	driver.findElementByXPath(OR.getProperty("emoticonItem")).click();
+	
 
 //	driver.findElementById(OR.getProperty("postTextField")).sendKeys(OR.getProperty("postTextLT300"));
 	driver.findElementByAccessibilityId(OR.getProperty("postSendBtn")).click();		
@@ -524,7 +550,7 @@ public static void startNewChat(){
 //	waitForElementPresent(MobileBy.AccessibilityId(OR.getProperty("mainBtn")), 20).click();
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 
-	while(!(isElementPresent(MobileBy.AccessibilityId(OR.getProperty("chatBtn")), 5) && isElementPresent(MobileBy.AccessibilityId(OR.getProperty("searchBtn")), 5) )){
+	while(!(isElementClickable(MobileBy.AccessibilityId(OR.getProperty("chatBtn")), 5) && isElementClickable(MobileBy.AccessibilityId(OR.getProperty("searchBtn")), 5) )){
 		System.out.print("**inwhile -navigation button");
 		driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 		}
@@ -575,7 +601,7 @@ public static void privateChat() throws InterruptedException{
 //	driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
  postEmoticonInChat();
 
- sendGiftInPrivateChat();
+// sendGiftInPrivateChat();
 
 	driver.findElementById(OR.getProperty("chatTextField")).sendKeys("private chat - hi @ "+getCurrentTimeStamp());
 
@@ -705,7 +731,7 @@ public static void newGroupChat() throws InterruptedException{
 
 	
 	
-	sendGiftInGroupChat();
+//	sendGiftInGroupChat();
 
 	postEmoticonInChat();
 	
@@ -794,6 +820,7 @@ public static String getCurrentTimeStamp(){
 	 
 	 Timestamp ts = new Timestamp(date.getTime());
 	 return ts.toString();
+	
 }
 
 
