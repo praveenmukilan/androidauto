@@ -41,6 +41,9 @@ shutterBtn=com.android.camera:id/review_control
 doneBtn=com.android.camera:id/btn_done
 cameraBtnCancel=com.android.camera:id/btn_cancel
 
+savePhotoRealDevice=com.sec.android.app.camera:id/save
+savePhotoRealDevice_xp=//android.widget.Button[@text='Save']
+
 
 #Chats Page
 newChatBtn=ad_chatadd_white

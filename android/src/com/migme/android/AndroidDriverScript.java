@@ -197,7 +197,6 @@ public class AndroidDriverScript{
 
 		
 		privateChat();
-//	
 		postText();
 		postImage();
 		postEmoticons();
@@ -452,16 +451,37 @@ public static void postImage(){
 	driver.findElementByAccessibilityId(OR.getProperty("photoBtn")).click();
 	driver.findElementByXPath(OR.getProperty("cameraOption")).click();
 	
-	driver.findElementById(OR.getProperty("shutterBtn")).click();
-	driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	
-	if(isElementPresent(MobileBy.id(OR.getProperty("doneBtn")), 10))
-	    driver.findElementById(OR.getProperty("doneBtn")).click();
+	if(isElementClickable(By.id(OR.getProperty("shutterBtn")), 5)){
+		driver.findElementById(OR.getProperty("shutterBtn")).click();
+//		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		if(isElementPresent(MobileBy.id(OR.getProperty("doneBtn")), 10))
+		    driver.findElementById(OR.getProperty("doneBtn")).click();
+		else{
+			System.out.println("Camera is not working. Please check");
+		    driver.findElementById(OR.getProperty("cameraBtnCancel")).click();
+		    System.out.println("image could not be taken using camera. pls check!");
+			}
+	}
+	/*
 	else{
-		System.out.println("Camera is not working. Please check");
-	    driver.findElementById(OR.getProperty("cameraBtnCancel")).click();
-	    System.out.println("image could not be taken using camera. pls check!");
-		}
+		executeADBCommand("adb shell \"am start -a android.media.action.STILL_IMAGE_CAMERA\" && sleep 1 && adb shell \"input keyevent 27\"");
+		System.out.println("adb shell \"am start -a android.media.action.STILL_IMAGE_CAMERA\" && sleep 1 && adb shell \"input keyevent 27\"");
+		driver.findElementById("com.sec.android.app.camera:id/myButton").click();
+		if(isElementPresent(MobileBy.id(OR.getProperty("savePhotoRealDevice")), 10))
+		    driver.findElementById(OR.getProperty("savePhotoRealDevice")).click();
+		else{
+			System.out.println("Camera is not working. Please check");
+		    driver.findElementById(OR.getProperty("cameraBtnCancel")).click();
+		    System.out.println("image could not be taken using camera. pls check!");
+			}
+
+	}
+	*/
+	
+	
+	
+	
+
 	
 	driver.findElementById(OR.getProperty("postTextField")).sendKeys(RandomStringUtils.randomAlphabetic(100));
 	driver.findElementByAccessibilityId(OR.getProperty("postSendBtn")).click();
@@ -825,7 +845,18 @@ public static String getCurrentTimeStamp(){
 
 
 
+public static void executeADBCommand(String command) throws ExecuteException, IOException, InterruptedException{
+	System.out.println("************execute adb command************");
+	System.out.println(command);
+//adb shell "am start -a android.media.action.STILL_IMAGE_CAMERA" && sleep 1 && adb shell "input keyevent 27"
+	
+	CommandLine enterpass = new CommandLine("$ANDROID_HOME/platform-tools/"+command  );
 
+	//CommandLine enterpass = new CommandLine("adb -s 192.168.56.101:5555 shell input text "+password);
+	executor.execute(enterpass, resultHandler);
+	
+	Thread.sleep(10000);
+}
 
 public static void sendKeysUsingADB(String textString) throws ExecuteException, IOException, InterruptedException{
 	System.out.println("************send keys using adb************");
