@@ -318,7 +318,7 @@ public class AndroidDriverScript{
 
 		System.out.println("****************setUp Ends****************");
 		
-		signIn();
+//		signIn();
 		retry=0;
 		
 	}catch(UnreachableBrowserException unbe){
@@ -561,7 +561,7 @@ public static void startNewChat(){
 		
 	//main button click to view the new private group chat icon
 	driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
-	while(!isElementPresent(MobileBy.AccessibilityId(OR.getProperty("newChatBtn")), 10)){
+	while(!(isElementPresent(MobileBy.AccessibilityId(OR.getProperty("newChatBtn")), 10) && isElementClickable(MobileBy.AccessibilityId(OR.getProperty("userInviteBtn")), 5))){
 		System.out.print("**inwhile- ad chatadd white ");
 		driver.findElementByAccessibilityId(OR.getProperty("mainBtn")).click();
 		}

@@ -26,6 +26,7 @@ cameraBtn=ad_camera_white
 searchBtn=ad_search_white
 feedBtn=ad_feed_orange
 chatBtn=navigation_button
+userInviteBtn=ad_userinvite_white
 
 #Posts Page
 postTextField=com.projectgoth:id/share_field
