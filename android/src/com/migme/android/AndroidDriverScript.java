@@ -544,7 +544,7 @@ public static void postEmoticons(){
 
 
 
-public static void chatToFeedPage(){
+public static void chatToFeedPage() throws InterruptedException{
 	System.out.println("*****************chatToFeedPage*********************");
 	//to navigate back from chat window
 	
@@ -560,6 +560,7 @@ public static void chatToFeedPage(){
 		}
 
 	driver.findElementByAccessibilityId(OR.getProperty("feedBtn")).click();
+	Thread.sleep(5000);
 
 }
 public static void startNewChat(){
